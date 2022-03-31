@@ -11,4 +11,11 @@ describe('Markdown should', () => {
         expect(markDown.convert('# prueba h1')).toBe('<h1>prueba h1</h1>');
         expect(markDown.convert('## prueba h2')).toBe('<h2>prueba h2</h2>');
     });
+    
+    it('give back bold as <b>' , () => {
+        expect(markDown.convert('**prueba bold**')).toBe('<b>prueba bold</b>');
+        expect(markDown.convert('** prueba bold **')).toBe('<b> prueba bold </b>');
+    });
+    
+    
 });

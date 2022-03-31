@@ -8,7 +8,10 @@ export class MarkDown {
 
         return '<p>' + content + '</p>';
     }
+
+    
 }
 
 
 
+//<b>bold</b>
