@@ -13,9 +13,17 @@ describe('Markdown should', () => {
     });
     
     it('give back bold as <b>' , () => {
-        expect(markDown.convert('**prueba bold**')).toBe('<b>prueba bold</b>');
-        expect(markDown.convert('** prueba bold **')).toBe('<b> prueba bold </b>');
+        expect(markDown.convert('**prueba bold**')).toBe('<p><b>prueba bold</b></p>');
+        expect(markDown.convert('** prueba bold **')).toBe('<p><b> prueba bold </b></p>');
+        expect(markDown.convert('prueba **bold** en medio del texto')).toBe('<p>prueba <b>bold</b> en medio del texto</p>');
+        expect(markDown.convert('prueba **bold** en ** medio ** del texto')).toBe('<p>prueba <b>bold</b> en <b> medio </b> del texto</p>');
+        expect(markDown.convert('__prueba bold__')).toBe('<p><b>prueba bold</b></p>');
+        expect(markDown.convert('__ prueba bold __')).toBe('<p><b> prueba bold </b></p>');
+        expect(markDown.convert('prueba __bold__ en medio del texto')).toBe('<p>prueba <b>bold</b> en medio del texto</p>');
+        expect(markDown.convert('prueba __bold__ en __ medio __ del texto')).toBe('<p>prueba <b>bold</b> en <b> medio </b> del texto</p>');
     });
+    
+    
     
     
 });
