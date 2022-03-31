@@ -22,8 +22,15 @@ describe('Markdown should', () => {
         expect(markDown.convert('prueba __bold__ en medio del texto')).toBe('<p>prueba <b>bold</b> en medio del texto</p>');
         expect(markDown.convert('prueba __bold__ en __ medio __ del texto')).toBe('<p>prueba <b>bold</b> en <b> medio </b> del texto</p>');
     });
-    
-    
-    
-    
+
+    it('give back italic as <i>' , () => {
+        expect(markDown.convert('*prueba italic*')).toBe('<p><i>prueba italic</i></p>');
+        expect(markDown.convert('* prueba italic *')).toBe('<p><i> prueba italic </i></p>');
+        expect(markDown.convert('prueba *italic* en medio del texto')).toBe('<p>prueba <i>italic</i> en medio del texto</p>');
+        expect(markDown.convert('prueba *italic* en * medio * del texto')).toBe('<p>prueba <i>italic</i> en <i> medio </i> del texto</p>');
+        expect(markDown.convert('_prueba italic_')).toBe('<p><i>prueba italic</i></p>');
+        expect(markDown.convert('_ prueba italic _')).toBe('<p><i> prueba italic </i></p>');
+        expect(markDown.convert('prueba _italic_ en medio del texto')).toBe('<p>prueba <i>italic</i> en medio del texto</p>');
+        expect(markDown.convert('prueba _italic_ en _ medio _ del texto')).toBe('<p>prueba <i>italic</i> en <i> medio </i> del texto</p>');
+    });
 });
