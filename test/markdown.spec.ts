@@ -33,4 +33,12 @@ describe('Markdown should', () => {
         expect(markDown.convert('prueba _italic_ en medio del texto')).toBe('<p>prueba <i>italic</i> en medio del texto</p>');
         expect(markDown.convert('prueba _italic_ en _ medio _ del texto')).toBe('<p>prueba <i>italic</i> en <i> medio </i> del texto</p>');
     });
+
+    it('give back bold and inside italic' , () => {
+        expect(markDown.convert('__Text *prueba* test__')).toBe('<p><b>Text <i>prueba</i> test</b></p>');
+        expect(markDown.convert('**Text *prueba* test**')).toBe('<p><b>Text <i>prueba</i> test</b></p>');
+        expect(markDown.convert('**Text _prueba_ test**')).toBe('<p><b>Text <i>prueba</i> test</b></p>');
+        expect(markDown.convert('__Text _prueba_ test__')).toBe('<p><b>Text <i>prueba</i> test</b></p>');
+    });
 });
+
