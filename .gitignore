@@ -1,4 +1,5 @@
 .vscode
+coverage
 
 # Dependencies
 node_modules/
