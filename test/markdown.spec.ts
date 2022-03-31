@@ -40,5 +40,12 @@ describe('Markdown should', () => {
         expect(markDown.convert('**Text _prueba_ test**')).toBe('<p><b>Text <i>prueba</i> test</b></p>');
         expect(markDown.convert('__Text _prueba_ test__')).toBe('<p><b>Text <i>prueba</i> test</b></p>');
     });
+
+    it('give back strike as <s>' , () => {
+        expect(markDown.convert('~~prueba strike~~')).toBe('<p><s>prueba strike</s></p>');
+        expect(markDown.convert('~~ prueba strike ~~')).toBe('<p><s> prueba strike </s></p>');
+        expect(markDown.convert('prueba ~~strike~~ en medio del texto')).toBe('<p>prueba <s>strike</s> en medio del texto</p>');
+        expect(markDown.convert('prueba ~~strike~~ en ~~ medio ~~ del texto')).toBe('<p>prueba <s>strike</s> en <s> medio </s> del texto</p>');
+    });
 });
 

@@ -79,21 +79,3 @@ export class MarkDown {
         return content;
     }
 }
-
-// **hola**sajdfjfdaf**adios**
-//<b>hola</b>asdjfksad**adios**
-//<b>hola</b>asfdsajf<b>adios</b>
-//Expression: /\*\*(.*?)\*\*/g
-
-
-/*
-##Hasjdfklsadkfsakldfksafsadflkksadfjalsdj
-
-sadfsadf
-
-#asd
-
-````
-ss
-```
-*/
