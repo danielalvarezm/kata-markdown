@@ -32,12 +32,18 @@ const styleTextDictionary = [
         type: 'strike',
         tag: 's'
     },
-    /* {
+    {
+        notation: '```',
+        expression: /^```(.*?)$/gm,
+        type: 'code',
+        tag: 'code'
+    },
+    {
         notation: '`',
         expression: /\`(.*?)\`/g,
         type: 'code',
         tag: 'code'
-    }, */
+    },
     /* {
         notation: '__',
         expression: /\_\_(.*?)\_\_/g,
@@ -53,6 +59,104 @@ const styleTextDictionary = [
 
 ];
 
+//Dicitionary of titles markdown syntax
+const styleTitleDictionary = [
+    {
+        notation: '#',
+        expression: /^#(.*?)$/gm,
+        type: 'h1',
+        tag: 'h1'
+    },
+    {
+        notation: '##',
+        expression: /^##(.*?)$/gm,
+        type: 'h2',
+        tag: 'h2'
+    },
+    {
+        notation: '###',
+        expression: /^###(.*?)$/gm,
+        type: 'h3',
+        tag: 'h3'
+    },
+    {
+        notation: '####',
+        expression: /^####(.*?)$/gm,
+        type: 'h4',
+        tag: 'h4'
+    },
+    {
+        notation: '#####',
+        expression: /^#####(.*?)$/gm,
+        type: 'h5',
+        tag: 'h5'
+    },
+    {
+        notation: '######',
+        expression: /^######(.*?)$/gm,
+        type: 'h6',
+        tag: 'h6'
+    },
+];
+
+//Dictionary of link markdown syntax
+const linkDictionary = [
+    {
+        notation: '[',
+        expression: /\[(.*?)\]\((.*?)\)/g,
+        type: 'link',
+        tag: 'a'
+    },
+];
+
+//Dictionary of image markdown syntax
+const imageDictionary = [
+    {
+        notation: '![',
+        expression: /\!\[(.*?)\]\((.*?)\)/g,
+        type: 'image',
+        tag: 'img'
+    },
+];
+
+//Dictionary of list markdown syntax
+const listDictionary = [
+    {
+        notation: '*',
+        expression: /^\*(.*?)$/gm,
+        type: 'list',
+        tag: 'li'
+    },
+    {
+        notation: '-',
+        expression: /^\-(.*?)$/gm,
+        type: 'list',
+        tag: 'li'
+    }
+];
+
+//Dictionary of blockquote markdown syntax
+const blockquoteDictionary = [
+    {
+        notation: '>',
+        expression: /^\>(.*?)$/gm,
+        type: 'blockquote',
+        tag: 'blockquote'
+    },
+];
+
+//Dictionary of code markdown syntax
+const codeDictionary = [
+    {
+        notation: '```',
+        expression: /^```(.*?)$/gm,
+        type: 'code',
+        tag: 'code'
+    },
+];
+
+
+    
 export class MarkDown {    
     public convert(content:string): string {
         const splittedString:string[] = content.split(' ');
@@ -73,6 +177,19 @@ export class MarkDown {
                 (content) =>
                     `<${style.tag}>` +
                         content.slice(style.notation.length, content.length - style.notation.length) +
+                    `</${style.tag}>`
+            );
+        });
+        return content;
+    }
+
+    private changeStylesTitle(content:string): string {
+        styleTitleDictionary.forEach(style=> {
+            content = content.replace(
+                style.expression ,
+                (content) =>
+                    `<${style.tag}>` +
+                        content.slice(style.notation.length, content.length) +
                     `</${style.tag}>`
             );
         });
